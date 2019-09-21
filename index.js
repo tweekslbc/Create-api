@@ -48,6 +48,8 @@ await mapAndCreate(products, Product);
 
 module.exports = {
     syncAndSeed,
-    Categories,
-    Products,
+    models : {
+        Product,
+        Category
+    }
 };
