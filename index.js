@@ -1,40 +1,40 @@
 const conn = require('./conn');
-const Product = require('./Product');
-const Category = require('./Category');
+const User = require('./User');
+const Department = require('./Department');
 
 const mapAndCreate = (items, model)=> {
     return Promise.all(items.map ( item => model.create(item)));
-    
+
 }
 
 const syncAndSeed = async()=> {
     await conn.sync({ force: true });
-    const categories =[
+    const departments =[
         { name: 'FOO' },
         { name: 'BAR' },
         { name: 'BAZZ' },
         { name: 'QUQ' }
 ];
-const [ FOO, BAR, BAZZ, QUQ ] = await mapAndCreate(categories, Category);
-    
-    const products = [
-        { name: 'foo', categoryId: FOO.id },
-        { name: 'foo2', categoryId: FOO.id },
-        { name: 'bar', categoryId: BAR.id},
-        { name: 'bazz', categoryId: BAZZ.id }
+const [ FOO, BAR, BAZZ, QUQ ] = await mapAndCreate(departments, Department);
+
+    const users = [
+        { name: 'foo', departmentId: FOO.id },
+        { name: 'foo2', departmentId: FOO.id },
+        { name: 'bar', departmentId: BAR.id},
+        { name: 'bazz', departmentId: BAZZ.id }
 ];
- 
- 
-const [ foo1, foo2, bar, bazz ] = await mapAndCreate(products, Product);
+
+
+const [ foo1, foo2, bar, bazz ] = await mapAndCreate(users, User);
 
 return {
-    products: {
+    users: {
         foo1,
         foo2,
         bar,
         bazz
     },
-    categories: {
+    departments: {
         FOO,
         BAR,
         BAZZ,
@@ -42,14 +42,14 @@ return {
     }
 };
 
-await mapAndCreate(products, Product);
+await mapAndCreate(users, User);
 
 };
 
 module.exports = {
     syncAndSeed,
     models : {
-        Product,
-        Category
+        User,
+        Department
     }
 };

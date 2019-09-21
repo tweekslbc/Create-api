@@ -1,7 +1,7 @@
 const conn = require('./conn');
 const { UUID, UUIDV4, STRING } = conn.Sequelize;
 
-const Category = conn.define('category', {
+const Department = conn.define('department', {
     id: {
         primaryKey: true,
         type: UUID,
@@ -10,4 +10,4 @@ const Category = conn.define('category', {
     name: STRING
 });
 
-module.exports = Product;
+module.exports = Department;
