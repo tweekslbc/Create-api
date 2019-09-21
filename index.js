@@ -2,6 +2,8 @@ const conn = require('./conn');
 const User = require('./User');
 const Department = require('./Department');
 
+User.belongsTo(Department);
+
 const mapAndCreate = (items, model)=> {
     return Promise.all(items.map ( item => model.create(item)));
 
